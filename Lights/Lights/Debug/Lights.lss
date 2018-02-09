@@ -1,0 +1,1330 @@
+
+Lights.elf:     file format elf32-avr
+
+Sections:
+Idx Name          Size      VMA       LMA       File off  Algn
+  0 .text         0000066c  00000000  00000000  00000094  2**1
+                  CONTENTS, ALLOC, LOAD, READONLY, CODE
+  1 .data         00000036  00800060  0000066c  00000700  2**0
+                  CONTENTS, ALLOC, LOAD, DATA
+  2 .bss          00000026  00800096  00800096  00000736  2**0
+                  ALLOC
+  3 .comment      00000030  00000000  00000000  00000736  2**0
+                  CONTENTS, READONLY
+  4 .debug_aranges 000001f8  00000000  00000000  00000766  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  5 .debug_info   00000dfe  00000000  00000000  0000095e  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  6 .debug_abbrev 00000757  00000000  00000000  0000175c  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  7 .debug_line   00000789  00000000  00000000  00001eb3  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  8 .debug_frame  000003d0  00000000  00000000  0000263c  2**2
+                  CONTENTS, READONLY, DEBUGGING
+  9 .debug_str    000004a8  00000000  00000000  00002a0c  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 10 .debug_loc    0000042a  00000000  00000000  00002eb4  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 11 .debug_ranges 000001a8  00000000  00000000  000032de  2**0
+                  CONTENTS, READONLY, DEBUGGING
+
+Disassembly of section .text:
+
+00000000 <__vectors>:
+   0:	0c 94 2a 00 	jmp	0x54	; 0x54 <__ctors_end>
+   4:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+   8:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+   c:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  10:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  14:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  18:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  1c:	0c 94 7c 02 	jmp	0x4f8	; 0x4f8 <__vector_7>
+  20:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  24:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  28:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  2c:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  30:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  34:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  38:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  3c:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  40:	0c 94 5d 00 	jmp	0xba	; 0xba <__vector_16>
+  44:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  48:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  4c:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  50:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+
+00000054 <__ctors_end>:
+  54:	11 24       	eor	r1, r1
+  56:	1f be       	out	0x3f, r1	; 63
+  58:	cf e5       	ldi	r28, 0x5F	; 95
+  5a:	d8 e0       	ldi	r29, 0x08	; 8
+  5c:	de bf       	out	0x3e, r29	; 62
+  5e:	cd bf       	out	0x3d, r28	; 61
+
+00000060 <__do_copy_data>:
+  60:	10 e0       	ldi	r17, 0x00	; 0
+  62:	a0 e6       	ldi	r26, 0x60	; 96
+  64:	b0 e0       	ldi	r27, 0x00	; 0
+  66:	ec e6       	ldi	r30, 0x6C	; 108
+  68:	f6 e0       	ldi	r31, 0x06	; 6
+  6a:	02 c0       	rjmp	.+4      	; 0x70 <__do_copy_data+0x10>
+  6c:	05 90       	lpm	r0, Z+
+  6e:	0d 92       	st	X+, r0
+  70:	a6 39       	cpi	r26, 0x96	; 150
+  72:	b1 07       	cpc	r27, r17
+  74:	d9 f7       	brne	.-10     	; 0x6c <__do_copy_data+0xc>
+
+00000076 <__do_clear_bss>:
+  76:	20 e0       	ldi	r18, 0x00	; 0
+  78:	a6 e9       	ldi	r26, 0x96	; 150
+  7a:	b0 e0       	ldi	r27, 0x00	; 0
+  7c:	01 c0       	rjmp	.+2      	; 0x80 <.do_clear_bss_start>
+
+0000007e <.do_clear_bss_loop>:
+  7e:	1d 92       	st	X+, r1
+
+00000080 <.do_clear_bss_start>:
+  80:	ac 3b       	cpi	r26, 0xBC	; 188
+  82:	b2 07       	cpc	r27, r18
+  84:	e1 f7       	brne	.-8      	; 0x7e <.do_clear_bss_loop>
+  86:	0e 94 55 02 	call	0x4aa	; 0x4aa <main>
+  8a:	0c 94 34 03 	jmp	0x668	; 0x668 <_exit>
+
+0000008e <__bad_interrupt>:
+  8e:	0c 94 00 00 	jmp	0	; 0x0 <__vectors>
+
+00000092 <adc_init>:
+#include "Global.h"
+#include "avr/interrupt.h"
+uint16 result_ADC;
+void adc_init()
+{
+	cli();
+  92:	f8 94       	cli
+	
+	ADMUX=0x40;
+  94:	80 e4       	ldi	r24, 0x40	; 64
+  96:	87 b9       	out	0x07, r24	; 7
+
+	ADCSRA|=1<<ADIE;
+  98:	33 9a       	sbi	0x06, 3	; 6
+	ADCSRA|=6; //prscaler =64
+  9a:	86 b1       	in	r24, 0x06	; 6
+  9c:	86 60       	ori	r24, 0x06	; 6
+  9e:	86 b9       	out	0x06, r24	; 6
+	ADCSRA|=1<<ADEN;
+  a0:	37 9a       	sbi	0x06, 7	; 6
+	
+	sei();
+  a2:	78 94       	sei
+  a4:	08 95       	ret
+
+000000a6 <get_result_ADC>:
+	
+}
+uint16 get_result_ADC(void)
+{
+	return result_ADC;
+}
+  a6:	80 91 b4 00 	lds	r24, 0x00B4
+  aa:	90 91 b5 00 	lds	r25, 0x00B5
+  ae:	08 95       	ret
+
+000000b0 <adc_cyclic>:
+void adc_cyclic(uint8 channel)
+{
+ 	ADMUX |= channel;
+  b0:	97 b1       	in	r25, 0x07	; 7
+  b2:	89 2b       	or	r24, r25
+  b4:	87 b9       	out	0x07, r24	; 7
+ 	ADCSRA |= 1<<ADSC;
+  b6:	36 9a       	sbi	0x06, 6	; 6
+  b8:	08 95       	ret
+
+000000ba <__vector_16>:
+}
+
+
+ISR(ADC_vect)
+{
+  ba:	1f 92       	push	r1
+  bc:	0f 92       	push	r0
+  be:	0f b6       	in	r0, 0x3f	; 63
+  c0:	0f 92       	push	r0
+  c2:	11 24       	eor	r1, r1
+  c4:	8f 93       	push	r24
+  c6:	9f 93       	push	r25
+	result_ADC=ADC;
+  c8:	84 b1       	in	r24, 0x04	; 4
+  ca:	95 b1       	in	r25, 0x05	; 5
+  cc:	90 93 b5 00 	sts	0x00B5, r25
+  d0:	80 93 b4 00 	sts	0x00B4, r24
+  d4:	9f 91       	pop	r25
+  d6:	8f 91       	pop	r24
+  d8:	0f 90       	pop	r0
+  da:	0f be       	out	0x3f, r0	; 63
+  dc:	0f 90       	pop	r0
+  de:	1f 90       	pop	r1
+  e0:	18 95       	reti
+
+000000e2 <setEvent>:
+ */ 
+#include "Global.h"
+uint16 events;
+void setEvent(uint8 ev)
+{
+	events |=1<<ev;
+  e2:	21 e0       	ldi	r18, 0x01	; 1
+  e4:	30 e0       	ldi	r19, 0x00	; 0
+  e6:	a9 01       	movw	r20, r18
+  e8:	02 c0       	rjmp	.+4      	; 0xee <setEvent+0xc>
+  ea:	44 0f       	add	r20, r20
+  ec:	55 1f       	adc	r21, r21
+  ee:	8a 95       	dec	r24
+  f0:	e2 f7       	brpl	.-8      	; 0xea <setEvent+0x8>
+  f2:	20 91 b6 00 	lds	r18, 0x00B6
+  f6:	30 91 b7 00 	lds	r19, 0x00B7
+  fa:	24 2b       	or	r18, r20
+  fc:	35 2b       	or	r19, r21
+  fe:	30 93 b7 00 	sts	0x00B7, r19
+ 102:	20 93 b6 00 	sts	0x00B6, r18
+ 106:	08 95       	ret
+
+00000108 <resetEvent>:
+}
+
+void resetEvent(uint8 ev)
+{
+	events &=~(1<<ev);
+ 108:	21 e0       	ldi	r18, 0x01	; 1
+ 10a:	30 e0       	ldi	r19, 0x00	; 0
+ 10c:	a9 01       	movw	r20, r18
+ 10e:	02 c0       	rjmp	.+4      	; 0x114 <resetEvent+0xc>
+ 110:	44 0f       	add	r20, r20
+ 112:	55 1f       	adc	r21, r21
+ 114:	8a 95       	dec	r24
+ 116:	e2 f7       	brpl	.-8      	; 0x110 <resetEvent+0x8>
+ 118:	9a 01       	movw	r18, r20
+ 11a:	20 95       	com	r18
+ 11c:	30 95       	com	r19
+ 11e:	80 91 b6 00 	lds	r24, 0x00B6
+ 122:	90 91 b7 00 	lds	r25, 0x00B7
+ 126:	28 23       	and	r18, r24
+ 128:	39 23       	and	r19, r25
+ 12a:	30 93 b7 00 	sts	0x00B7, r19
+ 12e:	20 93 b6 00 	sts	0x00B6, r18
+ 132:	08 95       	ret
+
+00000134 <getEvent>:
+}
+
+uint16 getEvent(void)
+{
+	return events;
+ 134:	80 91 b6 00 	lds	r24, 0x00B6
+ 138:	90 91 b7 00 	lds	r25, 0x00B7
+ 13c:	08 95       	ret
+
+0000013e <processEvents>:
+
+func_point f_leds[8]={ CL_func, IGN_func, TL_func, TR_func, B_func, HB_func, FL_func, SME_func };
+
+
+void processEvents(void)
+{
+ 13e:	ef 92       	push	r14
+ 140:	ff 92       	push	r15
+ 142:	0f 93       	push	r16
+ 144:	1f 93       	push	r17
+ 146:	cf 93       	push	r28
+ 148:	df 93       	push	r29
+	uint8 i=0;
+	uint16 ev=getEvent();
+ 14a:	0e 94 9a 00 	call	0x134	; 0x134 <getEvent>
+ 14e:	ec 01       	movw	r28, r24
+	while (ev)
+ 150:	00 97       	sbiw	r24, 0x00	; 0
+ 152:	c9 f1       	breq	.+114    	; 0x1c6 <processEvents+0x88>
+func_point f_leds[8]={ CL_func, IGN_func, TL_func, TR_func, B_func, HB_func, FL_func, SME_func };
+
+
+void processEvents(void)
+{
+	uint8 i=0;
+ 154:	f1 2c       	mov	r15, r1
+			{
+				states ^=(1<<4);
+			}
+			else
+			{
+				states ^=(1<<i);
+ 156:	01 e0       	ldi	r16, 0x01	; 1
+ 158:	10 e0       	ldi	r17, 0x00	; 0
+	{
+		if (ev & 1)
+		{
+			if (i==8)
+			{
+				states ^=(1<<4);
+ 15a:	68 94       	set
+ 15c:	ee 24       	eor	r14, r14
+ 15e:	e4 f8       	bld	r14, 4
+{
+	uint8 i=0;
+	uint16 ev=getEvent();
+	while (ev)
+	{
+		if (ev & 1)
+ 160:	c0 ff       	sbrs	r28, 0
+ 162:	2c c0       	rjmp	.+88     	; 0x1bc <processEvents+0x7e>
+		{
+			if (i==8)
+ 164:	98 e0       	ldi	r25, 0x08	; 8
+ 166:	f9 12       	cpse	r15, r25
+ 168:	06 c0       	rjmp	.+12     	; 0x176 <processEvents+0x38>
+			{
+				states ^=(1<<4);
+ 16a:	80 91 b8 00 	lds	r24, 0x00B8
+ 16e:	8e 25       	eor	r24, r14
+ 170:	80 93 b8 00 	sts	0x00B8, r24
+ 174:	1f c0       	rjmp	.+62     	; 0x1b4 <processEvents+0x76>
+			}
+			else
+			{
+				states ^=(1<<i);
+ 176:	20 91 b8 00 	lds	r18, 0x00B8
+ 17a:	c8 01       	movw	r24, r16
+ 17c:	0f 2c       	mov	r0, r15
+ 17e:	02 c0       	rjmp	.+4      	; 0x184 <processEvents+0x46>
+ 180:	88 0f       	add	r24, r24
+ 182:	99 1f       	adc	r25, r25
+ 184:	0a 94       	dec	r0
+ 186:	e2 f7       	brpl	.-8      	; 0x180 <processEvents+0x42>
+ 188:	82 27       	eor	r24, r18
+ 18a:	80 93 b8 00 	sts	0x00B8, r24
+			}
+			if (i==3 && (1&(states>>3)))
+ 18e:	93 e0       	ldi	r25, 0x03	; 3
+ 190:	f9 12       	cpse	r15, r25
+ 192:	06 c0       	rjmp	.+12     	; 0x1a0 <processEvents+0x62>
+ 194:	83 ff       	sbrs	r24, 3
+ 196:	0e c0       	rjmp	.+28     	; 0x1b4 <processEvents+0x76>
+			{
+				states &=~(1<<2);
+ 198:	8b 7f       	andi	r24, 0xFB	; 251
+ 19a:	80 93 b8 00 	sts	0x00B8, r24
+ 19e:	0a c0       	rjmp	.+20     	; 0x1b4 <processEvents+0x76>
+			}
+			if(i==2 && (1&(states>>2)))
+ 1a0:	82 e0       	ldi	r24, 0x02	; 2
+ 1a2:	f8 12       	cpse	r15, r24
+ 1a4:	07 c0       	rjmp	.+14     	; 0x1b4 <processEvents+0x76>
+ 1a6:	80 91 b8 00 	lds	r24, 0x00B8
+ 1aa:	82 ff       	sbrs	r24, 2
+ 1ac:	03 c0       	rjmp	.+6      	; 0x1b4 <processEvents+0x76>
+			{
+				states &=~(1<<3);
+ 1ae:	87 7f       	andi	r24, 0xF7	; 247
+ 1b0:	80 93 b8 00 	sts	0x00B8, r24
+			}
+			resetEvent(i);
+ 1b4:	8f 2d       	mov	r24, r15
+ 1b6:	90 e0       	ldi	r25, 0x00	; 0
+ 1b8:	0e 94 84 00 	call	0x108	; 0x108 <resetEvent>
+		}
+		i++;
+ 1bc:	f3 94       	inc	r15
+		ev>>=1;
+ 1be:	d6 95       	lsr	r29
+ 1c0:	c7 95       	ror	r28
+
+void processEvents(void)
+{
+	uint8 i=0;
+	uint16 ev=getEvent();
+	while (ev)
+ 1c2:	20 97       	sbiw	r28, 0x00	; 0
+ 1c4:	69 f6       	brne	.-102    	; 0x160 <processEvents+0x22>
+		}
+		i++;
+		ev>>=1;
+	}
+	//PORTC=~states;
+}
+ 1c6:	df 91       	pop	r29
+ 1c8:	cf 91       	pop	r28
+ 1ca:	1f 91       	pop	r17
+ 1cc:	0f 91       	pop	r16
+ 1ce:	ff 90       	pop	r15
+ 1d0:	ef 90       	pop	r14
+ 1d2:	08 95       	ret
+
+000001d4 <debounce_D>:
+
+uint16_t buffer[8]={0,0,0,0,0,0,0,0};
+sw_state_e enum_state[8]={0,0,0,0,0,0,0,0};
+
+void debounce_D(volatile uint8_t *port_button)
+{
+ 1d4:	df 92       	push	r13
+ 1d6:	ef 92       	push	r14
+ 1d8:	ff 92       	push	r15
+ 1da:	0f 93       	push	r16
+ 1dc:	1f 93       	push	r17
+ 1de:	cf 93       	push	r28
+ 1e0:	df 93       	push	r29
+ 1e2:	ec 01       	movw	r28, r24
+ 1e4:	01 e0       	ldi	r16, 0x01	; 1
+ 1e6:	10 e0       	ldi	r17, 0x00	; 0
+		{
+			enum_state[port_button_poz]=Bt_pressed;
+		}else
+		if((buffer[port_button_poz]&0x00ff)==0 && (buffer[port_button_poz]&0xff00)!=0 && enum_state[port_button_poz]==Bt_pressed)
+		{
+			enum_state[port_button_poz]=Bt_neg_edge;
+ 1e8:	0f 2e       	mov	r0, r31
+ 1ea:	f3 e0       	ldi	r31, 0x03	; 3
+ 1ec:	df 2e       	mov	r13, r31
+ 1ee:	f0 2d       	mov	r31, r0
+			enum_state[port_button_poz]=Bt_pos_edge;
+			setEvent(port_button_poz);
+		}else
+		if(buffer[port_button_poz]==0xffff && enum_state[port_button_poz]==Bt_pos_edge)
+		{
+			enum_state[port_button_poz]=Bt_pressed;
+ 1f0:	68 94       	set
+ 1f2:	ee 24       	eor	r14, r14
+ 1f4:	e1 f8       	bld	r14, 1
+		{
+			buffer[port_button_poz]|=0x01;
+		}
+		if(buffer[port_button_poz]==0x00ff && enum_state[port_button_poz]==Bt_unpressed)
+		{
+			enum_state[port_button_poz]=Bt_pos_edge;
+ 1f6:	ff 24       	eor	r15, r15
+ 1f8:	f3 94       	inc	r15
+ 1fa:	02 c0       	rjmp	.+4      	; 0x200 <debounce_D+0x2c>
+ 1fc:	1f 5f       	subi	r17, 0xFF	; 255
+ 1fe:	0f 5f       	subi	r16, 0xFF	; 255
+void debounce_D(volatile uint8_t *port_button)
+{
+	uint8 port_button_poz=0;
+	for (port_button_poz=0;port_button_poz<8;port_button_poz++)
+	{
+		buffer[port_button_poz]<<=1;
+ 200:	21 2f       	mov	r18, r17
+ 202:	30 e0       	ldi	r19, 0x00	; 0
+ 204:	f9 01       	movw	r30, r18
+ 206:	ee 0f       	add	r30, r30
+ 208:	ff 1f       	adc	r31, r31
+ 20a:	e2 56       	subi	r30, 0x62	; 98
+ 20c:	ff 4f       	sbci	r31, 0xFF	; 255
+ 20e:	40 81       	ld	r20, Z
+ 210:	51 81       	ldd	r21, Z+1	; 0x01
+ 212:	44 0f       	add	r20, r20
+ 214:	55 1f       	adc	r21, r21
+ 216:	51 83       	std	Z+1, r21	; 0x01
+ 218:	40 83       	st	Z, r20
+		if(((*port_button>>port_button_poz)&0x01)==0)
+ 21a:	88 81       	ld	r24, Y
+ 21c:	90 e0       	ldi	r25, 0x00	; 0
+ 21e:	01 2e       	mov	r0, r17
+ 220:	02 c0       	rjmp	.+4      	; 0x226 <debounce_D+0x52>
+ 222:	95 95       	asr	r25
+ 224:	87 95       	ror	r24
+ 226:	0a 94       	dec	r0
+ 228:	e2 f7       	brpl	.-8      	; 0x222 <debounce_D+0x4e>
+ 22a:	80 fd       	sbrc	r24, 0
+ 22c:	08 c0       	rjmp	.+16     	; 0x23e <debounce_D+0x6a>
+		{
+			buffer[port_button_poz]|=0x01;
+ 22e:	f9 01       	movw	r30, r18
+ 230:	ee 0f       	add	r30, r30
+ 232:	ff 1f       	adc	r31, r31
+ 234:	e2 56       	subi	r30, 0x62	; 98
+ 236:	ff 4f       	sbci	r31, 0xFF	; 255
+ 238:	41 60       	ori	r20, 0x01	; 1
+ 23a:	51 83       	std	Z+1, r21	; 0x01
+ 23c:	40 83       	st	Z, r20
+		}
+		if(buffer[port_button_poz]==0x00ff && enum_state[port_button_poz]==Bt_unpressed)
+ 23e:	f9 01       	movw	r30, r18
+ 240:	ee 0f       	add	r30, r30
+ 242:	ff 1f       	adc	r31, r31
+ 244:	e2 56       	subi	r30, 0x62	; 98
+ 246:	ff 4f       	sbci	r31, 0xFF	; 255
+ 248:	40 81       	ld	r20, Z
+ 24a:	51 81       	ldd	r21, Z+1	; 0x01
+ 24c:	4f 3f       	cpi	r20, 0xFF	; 255
+ 24e:	51 05       	cpc	r21, r1
+ 250:	71 f4       	brne	.+28     	; 0x26e <debounce_D+0x9a>
+ 252:	f9 01       	movw	r30, r18
+ 254:	ea 56       	subi	r30, 0x6A	; 106
+ 256:	ff 4f       	sbci	r31, 0xFF	; 255
+ 258:	80 81       	ld	r24, Z
+ 25a:	81 11       	cpse	r24, r1
+ 25c:	2e c0       	rjmp	.+92     	; 0x2ba <debounce_D+0xe6>
+		{
+			enum_state[port_button_poz]=Bt_pos_edge;
+ 25e:	f9 01       	movw	r30, r18
+ 260:	ea 56       	subi	r30, 0x6A	; 106
+ 262:	ff 4f       	sbci	r31, 0xFF	; 255
+ 264:	f0 82       	st	Z, r15
+			setEvent(port_button_poz);
+ 266:	c9 01       	movw	r24, r18
+ 268:	0e 94 71 00 	call	0xe2	; 0xe2 <setEvent>
+		if(((*port_button>>port_button_poz)&0x01)==0)
+		{
+			buffer[port_button_poz]|=0x01;
+		}
+		if(buffer[port_button_poz]==0x00ff && enum_state[port_button_poz]==Bt_unpressed)
+		{
+ 26c:	2c c0       	rjmp	.+88     	; 0x2c6 <debounce_D+0xf2>
+			enum_state[port_button_poz]=Bt_pos_edge;
+			setEvent(port_button_poz);
+		}else
+		if(buffer[port_button_poz]==0xffff && enum_state[port_button_poz]==Bt_pos_edge)
+ 26e:	4f 3f       	cpi	r20, 0xFF	; 255
+ 270:	8f ef       	ldi	r24, 0xFF	; 255
+ 272:	58 07       	cpc	r21, r24
+ 274:	59 f4       	brne	.+22     	; 0x28c <debounce_D+0xb8>
+ 276:	f9 01       	movw	r30, r18
+ 278:	ea 56       	subi	r30, 0x6A	; 106
+ 27a:	ff 4f       	sbci	r31, 0xFF	; 255
+ 27c:	80 81       	ld	r24, Z
+ 27e:	81 30       	cpi	r24, 0x01	; 1
+ 280:	11 f5       	brne	.+68     	; 0x2c6 <debounce_D+0xf2>
+		{
+			enum_state[port_button_poz]=Bt_pressed;
+ 282:	f9 01       	movw	r30, r18
+ 284:	ea 56       	subi	r30, 0x6A	; 106
+ 286:	ff 4f       	sbci	r31, 0xFF	; 255
+ 288:	e0 82       	st	Z, r14
+ 28a:	1d c0       	rjmp	.+58     	; 0x2c6 <debounce_D+0xf2>
+		}else
+		if((buffer[port_button_poz]&0x00ff)==0 && (buffer[port_button_poz]&0xff00)!=0 && enum_state[port_button_poz]==Bt_pressed)
+ 28c:	41 11       	cpse	r20, r1
+ 28e:	15 c0       	rjmp	.+42     	; 0x2ba <debounce_D+0xe6>
+ 290:	ca 01       	movw	r24, r20
+ 292:	88 27       	eor	r24, r24
+ 294:	89 2b       	or	r24, r25
+ 296:	89 f0       	breq	.+34     	; 0x2ba <debounce_D+0xe6>
+ 298:	f9 01       	movw	r30, r18
+ 29a:	ea 56       	subi	r30, 0x6A	; 106
+ 29c:	ff 4f       	sbci	r31, 0xFF	; 255
+ 29e:	80 81       	ld	r24, Z
+ 2a0:	82 30       	cpi	r24, 0x02	; 2
+ 2a2:	59 f4       	brne	.+22     	; 0x2ba <debounce_D+0xe6>
+		{
+			enum_state[port_button_poz]=Bt_neg_edge;
+ 2a4:	f9 01       	movw	r30, r18
+ 2a6:	ea 56       	subi	r30, 0x6A	; 106
+ 2a8:	ff 4f       	sbci	r31, 0xFF	; 255
+ 2aa:	d0 82       	st	Z, r13
+			if (port_button_poz==4)
+ 2ac:	14 30       	cpi	r17, 0x04	; 4
+ 2ae:	59 f4       	brne	.+22     	; 0x2c6 <debounce_D+0xf2>
+			{
+				setEvent(ev9_B_falling);
+ 2b0:	88 e0       	ldi	r24, 0x08	; 8
+ 2b2:	90 e0       	ldi	r25, 0x00	; 0
+ 2b4:	0e 94 71 00 	call	0xe2	; 0xe2 <setEvent>
+ 2b8:	a1 cf       	rjmp	.-190    	; 0x1fc <debounce_D+0x28>
+			}
+		}else
+		if(buffer[port_button_poz]==0x0000)
+ 2ba:	45 2b       	or	r20, r21
+ 2bc:	21 f4       	brne	.+8      	; 0x2c6 <debounce_D+0xf2>
+		{
+			enum_state[port_button_poz]=Bt_unpressed;
+ 2be:	f9 01       	movw	r30, r18
+ 2c0:	ea 56       	subi	r30, 0x6A	; 106
+ 2c2:	ff 4f       	sbci	r31, 0xFF	; 255
+ 2c4:	10 82       	st	Z, r1
+sw_state_e enum_state[8]={0,0,0,0,0,0,0,0};
+
+void debounce_D(volatile uint8_t *port_button)
+{
+	uint8 port_button_poz=0;
+	for (port_button_poz=0;port_button_poz<8;port_button_poz++)
+ 2c6:	08 30       	cpi	r16, 0x08	; 8
+ 2c8:	08 f4       	brcc	.+2      	; 0x2cc <debounce_D+0xf8>
+ 2ca:	98 cf       	rjmp	.-208    	; 0x1fc <debounce_D+0x28>
+		{
+			enum_state[port_button_poz]=Bt_unpressed;
+		}
+	}
+	
+}
+ 2cc:	df 91       	pop	r29
+ 2ce:	cf 91       	pop	r28
+ 2d0:	1f 91       	pop	r17
+ 2d2:	0f 91       	pop	r16
+ 2d4:	ff 90       	pop	r15
+ 2d6:	ef 90       	pop	r14
+ 2d8:	df 90       	pop	r13
+ 2da:	08 95       	ret
+
+000002dc <LED4>:
+		return LED3_;
+	return NO_LED_;
+}
+uint8 LED4(void)
+{
+	if(B)
+ 2dc:	80 91 b8 00 	lds	r24, 0x00B8
+ 2e0:	84 ff       	sbrs	r24, 4
+ 2e2:	02 c0       	rjmp	.+4      	; 0x2e8 <LED4+0xc>
+		return LED4_;
+ 2e4:	88 e0       	ldi	r24, 0x08	; 8
+ 2e6:	08 95       	ret
+	return NO_LED_;
+ 2e8:	80 e0       	ldi	r24, 0x00	; 0
+}
+ 2ea:	08 95       	ret
+
+000002ec <LED5>:
+uint8 LED5()
+{
+	static uint16 count_led5;
+	uint8 led_conf=NO_LED_ ;
+	if(TL)
+ 2ec:	80 91 b8 00 	lds	r24, 0x00B8
+ 2f0:	82 ff       	sbrs	r24, 2
+ 2f2:	09 c0       	rjmp	.+18     	; 0x306 <LED5+0x1a>
+	{
+		if(count_led5<400)
+ 2f4:	80 91 b2 00 	lds	r24, 0x00B2
+ 2f8:	90 91 b3 00 	lds	r25, 0x00B3
+ 2fc:	80 39       	cpi	r24, 0x90	; 144
+ 2fe:	91 40       	sbci	r25, 0x01	; 1
+ 300:	20 f4       	brcc	.+8      	; 0x30a <LED5+0x1e>
+			led_conf=LED5_;
+ 302:	80 e1       	ldi	r24, 0x10	; 16
+ 304:	03 c0       	rjmp	.+6      	; 0x30c <LED5+0x20>
+	return NO_LED_;
+}
+uint8 LED5()
+{
+	static uint16 count_led5;
+	uint8 led_conf=NO_LED_ ;
+ 306:	80 e0       	ldi	r24, 0x00	; 0
+ 308:	01 c0       	rjmp	.+2      	; 0x30c <LED5+0x20>
+	if(TL)
+	{
+		if(count_led5<400)
+			led_conf=LED5_;
+		else
+			led_conf=NO_LED_;
+ 30a:	80 e0       	ldi	r24, 0x00	; 0
+	}
+	count_led5++;
+ 30c:	20 91 b2 00 	lds	r18, 0x00B2
+ 310:	30 91 b3 00 	lds	r19, 0x00B3
+ 314:	2f 5f       	subi	r18, 0xFF	; 255
+ 316:	3f 4f       	sbci	r19, 0xFF	; 255
+	if(count_led5==1000)
+ 318:	28 3e       	cpi	r18, 0xE8	; 232
+ 31a:	93 e0       	ldi	r25, 0x03	; 3
+ 31c:	39 07       	cpc	r19, r25
+ 31e:	29 f0       	breq	.+10     	; 0x32a <LED5+0x3e>
+		if(count_led5<400)
+			led_conf=LED5_;
+		else
+			led_conf=NO_LED_;
+	}
+	count_led5++;
+ 320:	30 93 b3 00 	sts	0x00B3, r19
+ 324:	20 93 b2 00 	sts	0x00B2, r18
+ 328:	08 95       	ret
+	if(count_led5==1000)
+		count_led5=0;
+ 32a:	10 92 b3 00 	sts	0x00B3, r1
+ 32e:	10 92 b2 00 	sts	0x00B2, r1
+	return led_conf;
+}
+ 332:	08 95       	ret
+
+00000334 <LED6>:
+uint8 LED6()
+{
+	static uint16 count_led6;
+	uint8 led_conf=NO_LED_ ;
+	if(TR)
+ 334:	80 91 b8 00 	lds	r24, 0x00B8
+ 338:	83 ff       	sbrs	r24, 3
+ 33a:	09 c0       	rjmp	.+18     	; 0x34e <LED6+0x1a>
+	{
+		if(count_led6<400)
+ 33c:	80 91 b0 00 	lds	r24, 0x00B0
+ 340:	90 91 b1 00 	lds	r25, 0x00B1
+ 344:	80 39       	cpi	r24, 0x90	; 144
+ 346:	91 40       	sbci	r25, 0x01	; 1
+ 348:	20 f4       	brcc	.+8      	; 0x352 <LED6+0x1e>
+			led_conf=LED6_;
+ 34a:	80 e2       	ldi	r24, 0x20	; 32
+ 34c:	03 c0       	rjmp	.+6      	; 0x354 <LED6+0x20>
+	return led_conf;
+}
+uint8 LED6()
+{
+	static uint16 count_led6;
+	uint8 led_conf=NO_LED_ ;
+ 34e:	80 e0       	ldi	r24, 0x00	; 0
+ 350:	01 c0       	rjmp	.+2      	; 0x354 <LED6+0x20>
+	if(TR)
+	{
+		if(count_led6<400)
+			led_conf=LED6_;
+		else
+			led_conf=NO_LED_;
+ 352:	80 e0       	ldi	r24, 0x00	; 0
+	}
+	count_led6++;
+ 354:	20 91 b0 00 	lds	r18, 0x00B0
+ 358:	30 91 b1 00 	lds	r19, 0x00B1
+ 35c:	2f 5f       	subi	r18, 0xFF	; 255
+ 35e:	3f 4f       	sbci	r19, 0xFF	; 255
+	if(count_led6==1000)
+ 360:	28 3e       	cpi	r18, 0xE8	; 232
+ 362:	93 e0       	ldi	r25, 0x03	; 3
+ 364:	39 07       	cpc	r19, r25
+ 366:	29 f0       	breq	.+10     	; 0x372 <LED6+0x3e>
+		if(count_led6<400)
+			led_conf=LED6_;
+		else
+			led_conf=NO_LED_;
+	}
+	count_led6++;
+ 368:	30 93 b1 00 	sts	0x00B1, r19
+ 36c:	20 93 b0 00 	sts	0x00B0, r18
+ 370:	08 95       	ret
+	if(count_led6==1000)
+		count_led6=0;
+ 372:	10 92 b1 00 	sts	0x00B1, r1
+ 376:	10 92 b0 00 	sts	0x00B0, r1
+	return led_conf;
+}
+ 37a:	08 95       	ret
+
+0000037c <LED7>:
+uint8 LED7(void)
+{
+	if(FL)
+ 37c:	80 91 b8 00 	lds	r24, 0x00B8
+ 380:	86 ff       	sbrs	r24, 6
+ 382:	02 c0       	rjmp	.+4      	; 0x388 <LED7+0xc>
+		return LED7_;
+ 384:	80 e4       	ldi	r24, 0x40	; 64
+ 386:	08 95       	ret
+	return NO_LED_;
+ 388:	80 e0       	ldi	r24, 0x00	; 0
+}
+ 38a:	08 95       	ret
+
+0000038c <LED8>:
+uint8 LED8(void)
+{
+	if(HB)
+ 38c:	80 91 b8 00 	lds	r24, 0x00B8
+ 390:	85 ff       	sbrs	r24, 5
+ 392:	02 c0       	rjmp	.+4      	; 0x398 <LED8+0xc>
+		return LED8_;
+ 394:	80 e8       	ldi	r24, 0x80	; 128
+ 396:	08 95       	ret
+	return NO_LED_;
+ 398:	80 e0       	ldi	r24, 0x00	; 0
+}
+ 39a:	08 95       	ret
+
+0000039c <LED2>:
+{
+	return LED1_;
+}
+uint8 LED2(void)
+{
+	if(NIGHT || HB)
+ 39c:	0e 94 53 00 	call	0xa6	; 0xa6 <get_result_ADC>
+ 3a0:	88 36       	cpi	r24, 0x68	; 104
+ 3a2:	92 40       	sbci	r25, 0x02	; 2
+ 3a4:	30 f0       	brcs	.+12     	; 0x3b2 <LED2+0x16>
+ 3a6:	80 91 b8 00 	lds	r24, 0x00B8
+ 3aa:	85 ff       	sbrs	r24, 5
+ 3ac:	04 c0       	rjmp	.+8      	; 0x3b6 <LED2+0x1a>
+		return LED2_;
+ 3ae:	82 e0       	ldi	r24, 0x02	; 2
+ 3b0:	08 95       	ret
+ 3b2:	82 e0       	ldi	r24, 0x02	; 2
+ 3b4:	08 95       	ret
+	return NO_LED_;
+ 3b6:	80 e0       	ldi	r24, 0x00	; 0
+}
+ 3b8:	08 95       	ret
+
+000003ba <LED3>:
+uint8 LED3(void)
+{
+	if(HB || !NIGHT)
+ 3ba:	80 91 b8 00 	lds	r24, 0x00B8
+ 3be:	85 fd       	sbrc	r24, 5
+ 3c0:	07 c0       	rjmp	.+14     	; 0x3d0 <LED3+0x16>
+ 3c2:	0e 94 53 00 	call	0xa6	; 0xa6 <get_result_ADC>
+ 3c6:	88 36       	cpi	r24, 0x68	; 104
+ 3c8:	92 40       	sbci	r25, 0x02	; 2
+ 3ca:	20 f4       	brcc	.+8      	; 0x3d4 <LED3+0x1a>
+		return LED3_;
+	return NO_LED_;
+ 3cc:	80 e0       	ldi	r24, 0x00	; 0
+ 3ce:	08 95       	ret
+	return NO_LED_;
+}
+uint8 LED3(void)
+{
+	if(HB || !NIGHT)
+		return LED3_;
+ 3d0:	84 e0       	ldi	r24, 0x04	; 4
+ 3d2:	08 95       	ret
+ 3d4:	84 e0       	ldi	r24, 0x04	; 4
+	return NO_LED_;
+}
+ 3d6:	08 95       	ret
+
+000003d8 <LEDS>:
+	if(HB)
+		return LED8_;
+	return NO_LED_;
+}
+uint8 LEDS()
+{
+ 3d8:	cf 93       	push	r28
+ 3da:	df 93       	push	r29
+	static uint16 sme_count=0;
+	uint16 leds= NO_LED_;
+	if(IGN)
+ 3dc:	80 91 b8 00 	lds	r24, 0x00B8
+ 3e0:	81 ff       	sbrs	r24, 1
+ 3e2:	40 c0       	rjmp	.+128    	; 0x464 <LEDS+0x8c>
+	{
+		if (SME)
+ 3e4:	88 23       	and	r24, r24
+ 3e6:	dc f4       	brge	.+54     	; 0x41e <LEDS+0x46>
+		{
+			if(sme_count<1000)
+ 3e8:	80 91 ae 00 	lds	r24, 0x00AE
+ 3ec:	90 91 af 00 	lds	r25, 0x00AF
+ 3f0:	88 3e       	cpi	r24, 0xE8	; 232
+ 3f2:	93 40       	sbci	r25, 0x03	; 3
+ 3f4:	50 f4       	brcc	.+20     	; 0x40a <LEDS+0x32>
+			{
+				leds=LED4_+LED5_+LED6_;
+				if(NIGHT)
+ 3f6:	0e 94 53 00 	call	0xa6	; 0xa6 <get_result_ADC>
+ 3fa:	88 36       	cpi	r24, 0x68	; 104
+ 3fc:	92 40       	sbci	r25, 0x02	; 2
+ 3fe:	b8 f5       	brcc	.+110    	; 0x46e <LEDS+0x96>
+					leds+=LED1()+LED2();
+ 400:	0e 94 ce 01 	call	0x39c	; 0x39c <LED2>
+ 404:	90 e0       	ldi	r25, 0x00	; 0
+ 406:	c9 96       	adiw	r24, 0x39	; 57
+ 408:	37 c0       	rjmp	.+110    	; 0x478 <LEDS+0xa0>
+			}
+			else 
+			{	
+				if(NIGHT)
+ 40a:	0e 94 53 00 	call	0xa6	; 0xa6 <get_result_ADC>
+ 40e:	88 36       	cpi	r24, 0x68	; 104
+ 410:	92 40       	sbci	r25, 0x02	; 2
+ 412:	80 f5       	brcc	.+96     	; 0x474 <LEDS+0x9c>
+					leds=LED1()+LED2();
+ 414:	0e 94 ce 01 	call	0x39c	; 0x39c <LED2>
+ 418:	90 e0       	ldi	r25, 0x00	; 0
+ 41a:	01 96       	adiw	r24, 0x01	; 1
+ 41c:	2d c0       	rjmp	.+90     	; 0x478 <LEDS+0xa0>
+			}
+			//leds+=LED1();
+		}
+		else 
+		{
+			PORTD=0x00;
+ 41e:	12 ba       	out	0x12, r1	; 18
+			DDRD=0xff;
+ 420:	8f ef       	ldi	r24, 0xFF	; 255
+ 422:	81 bb       	out	0x11, r24	; 17
+			leds=LED1()+LED2()+LED3()+LED4()+LED5()+LED6()+LED7()+LED8();
+ 424:	0e 94 ce 01 	call	0x39c	; 0x39c <LED2>
+ 428:	c8 2f       	mov	r28, r24
+ 42a:	0e 94 dd 01 	call	0x3ba	; 0x3ba <LED3>
+ 42e:	d0 e0       	ldi	r29, 0x00	; 0
+ 430:	21 96       	adiw	r28, 0x01	; 1
+ 432:	c8 0f       	add	r28, r24
+ 434:	d1 1d       	adc	r29, r1
+ 436:	0e 94 6e 01 	call	0x2dc	; 0x2dc <LED4>
+ 43a:	c8 0f       	add	r28, r24
+ 43c:	d1 1d       	adc	r29, r1
+ 43e:	0e 94 76 01 	call	0x2ec	; 0x2ec <LED5>
+ 442:	c8 0f       	add	r28, r24
+ 444:	d1 1d       	adc	r29, r1
+ 446:	0e 94 9a 01 	call	0x334	; 0x334 <LED6>
+ 44a:	c8 0f       	add	r28, r24
+ 44c:	d1 1d       	adc	r29, r1
+ 44e:	0e 94 be 01 	call	0x37c	; 0x37c <LED7>
+ 452:	c8 0f       	add	r28, r24
+ 454:	d1 1d       	adc	r29, r1
+ 456:	0e 94 c6 01 	call	0x38c	; 0x38c <LED8>
+ 45a:	9e 01       	movw	r18, r28
+ 45c:	28 0f       	add	r18, r24
+ 45e:	31 1d       	adc	r19, r1
+ 460:	c9 01       	movw	r24, r18
+ 462:	0a c0       	rjmp	.+20     	; 0x478 <LEDS+0xa0>
+		}
+		
+	}
+	else 
+	{
+		PORTD=0xff;
+ 464:	8f ef       	ldi	r24, 0xFF	; 255
+ 466:	82 bb       	out	0x12, r24	; 18
+		leds=NO_LED_;
+ 468:	80 e0       	ldi	r24, 0x00	; 0
+ 46a:	9f ef       	ldi	r25, 0xFF	; 255
+ 46c:	05 c0       	rjmp	.+10     	; 0x478 <LEDS+0xa0>
+	{
+		if (SME)
+		{
+			if(sme_count<1000)
+			{
+				leds=LED4_+LED5_+LED6_;
+ 46e:	88 e3       	ldi	r24, 0x38	; 56
+ 470:	90 e0       	ldi	r25, 0x00	; 0
+ 472:	02 c0       	rjmp	.+4      	; 0x478 <LEDS+0xa0>
+			else 
+			{	
+				if(NIGHT)
+					leds=LED1()+LED2();
+				else
+					leds=NO_LED_;
+ 474:	80 e0       	ldi	r24, 0x00	; 0
+ 476:	9f ef       	ldi	r25, 0xFF	; 255
+	{
+		PORTD=0xff;
+		leds=NO_LED_;
+	}
+	//return/* LED1()LED2()+LED3()+LED4()+LED5()+LED6()+LED7()+LED8();
+	if(sme_count==2000)
+ 478:	20 91 ae 00 	lds	r18, 0x00AE
+ 47c:	30 91 af 00 	lds	r19, 0x00AF
+ 480:	20 3d       	cpi	r18, 0xD0	; 208
+ 482:	37 40       	sbci	r19, 0x07	; 7
+ 484:	21 f4       	brne	.+8      	; 0x48e <LEDS+0xb6>
+		sme_count=0;
+ 486:	10 92 af 00 	sts	0x00AF, r1
+ 48a:	10 92 ae 00 	sts	0x00AE, r1
+	sme_count++;
+ 48e:	20 91 ae 00 	lds	r18, 0x00AE
+ 492:	30 91 af 00 	lds	r19, 0x00AF
+ 496:	2f 5f       	subi	r18, 0xFF	; 255
+ 498:	3f 4f       	sbci	r19, 0xFF	; 255
+ 49a:	30 93 af 00 	sts	0x00AF, r19
+ 49e:	20 93 ae 00 	sts	0x00AE, r18
+	return ~leds;
+}
+ 4a2:	80 95       	com	r24
+ 4a4:	df 91       	pop	r29
+ 4a6:	cf 91       	pop	r28
+ 4a8:	08 95       	ret
+
+000004aa <main>:
+#include "avr/delay.h"
+#include "inputs.h"
+
+int main(void)
+{
+	adc_init();
+ 4aa:	0e 94 49 00 	call	0x92	; 0x92 <adc_init>
+	init_ports();
+ 4ae:	0e 94 62 02 	call	0x4c4	; 0x4c4 <init_ports>
+	init();
+ 4b2:	0e 94 bd 02 	call	0x57a	; 0x57a <init>
+	init_timer1();
+ 4b6:	0e 94 6a 02 	call	0x4d4	; 0x4d4 <init_timer1>
+	
+	scheduler();
+ 4ba:	0e 94 f8 02 	call	0x5f0	; 0x5f0 <scheduler>
+
+ 4be:	80 e0       	ldi	r24, 0x00	; 0
+ 4c0:	90 e0       	ldi	r25, 0x00	; 0
+ 4c2:	08 95       	ret
+
+000004c4 <init_ports>:
+#include "Lights_timer.h"
+#include "OS.h"
+
+void init_ports(void)
+{
+	DDRA=0x00;
+ 4c4:	1a ba       	out	0x1a, r1	; 26
+	PORTA=0xff;
+ 4c6:	8f ef       	ldi	r24, 0xFF	; 255
+ 4c8:	8b bb       	out	0x1b, r24	; 27
+	
+	DDRB=0x00;
+ 4ca:	17 ba       	out	0x17, r1	; 23
+	PORTB=0xff;
+ 4cc:	88 bb       	out	0x18, r24	; 24
+	
+	DDRC=0xff;
+ 4ce:	84 bb       	out	0x14, r24	; 20
+	PORTC=0xff;
+ 4d0:	85 bb       	out	0x15, r24	; 21
+ 4d2:	08 95       	ret
+
+000004d4 <init_timer1>:
+}
+
+void init_timer1(void)
+{
+	cli();
+ 4d4:	f8 94       	cli
+	TCCR1A|=0x00;
+ 4d6:	8f b5       	in	r24, 0x2f	; 47
+ 4d8:	8f bd       	out	0x2f, r24	; 47
+	TCCR1B|=(1<<WGM12)|(1<<CS10);
+ 4da:	8e b5       	in	r24, 0x2e	; 46
+ 4dc:	89 60       	ori	r24, 0x09	; 9
+ 4de:	8e bd       	out	0x2e, r24	; 46
+	TIMSK|=(1<<OCIE1A);
+ 4e0:	89 b7       	in	r24, 0x39	; 57
+ 4e2:	80 61       	ori	r24, 0x10	; 16
+ 4e4:	89 bf       	out	0x39, r24	; 57
+	TIFR|=(1<<OCF1A);
+ 4e6:	88 b7       	in	r24, 0x38	; 56
+ 4e8:	80 61       	ori	r24, 0x10	; 16
+ 4ea:	88 bf       	out	0x38, r24	; 56
+	OCR1A=1600-1;
+ 4ec:	8f e3       	ldi	r24, 0x3F	; 63
+ 4ee:	96 e0       	ldi	r25, 0x06	; 6
+ 4f0:	9b bd       	out	0x2b, r25	; 43
+ 4f2:	8a bd       	out	0x2a, r24	; 42
+	sei();
+ 4f4:	78 94       	sei
+ 4f6:	08 95       	ret
+
+000004f8 <__vector_7>:
+}
+
+ISR(TIMER1_COMPA_vect)
+{	
+ 4f8:	1f 92       	push	r1
+ 4fa:	0f 92       	push	r0
+ 4fc:	0f b6       	in	r0, 0x3f	; 63
+ 4fe:	0f 92       	push	r0
+ 500:	11 24       	eor	r1, r1
+ 502:	2f 93       	push	r18
+ 504:	3f 93       	push	r19
+ 506:	4f 93       	push	r20
+ 508:	5f 93       	push	r21
+ 50a:	6f 93       	push	r22
+ 50c:	7f 93       	push	r23
+ 50e:	8f 93       	push	r24
+ 510:	9f 93       	push	r25
+ 512:	af 93       	push	r26
+ 514:	bf 93       	push	r27
+ 516:	ef 93       	push	r30
+ 518:	ff 93       	push	r31
+	idle();
+ 51a:	0e 94 cd 02 	call	0x59a	; 0x59a <idle>
+}
+ 51e:	ff 91       	pop	r31
+ 520:	ef 91       	pop	r30
+ 522:	bf 91       	pop	r27
+ 524:	af 91       	pop	r26
+ 526:	9f 91       	pop	r25
+ 528:	8f 91       	pop	r24
+ 52a:	7f 91       	pop	r23
+ 52c:	6f 91       	pop	r22
+ 52e:	5f 91       	pop	r21
+ 530:	4f 91       	pop	r20
+ 532:	3f 91       	pop	r19
+ 534:	2f 91       	pop	r18
+ 536:	0f 90       	pop	r0
+ 538:	0f be       	out	0x3f, r0	; 63
+ 53a:	0f 90       	pop	r0
+ 53c:	1f 90       	pop	r1
+ 53e:	18 95       	reti
+
+00000540 <task_5ms>:
+	PORTC= LEDS();
+	
+	adc_cyclic(0);
+}
+void task_5ms(void)
+{
+ 540:	08 95       	ret
+
+00000542 <task_10ms>:
+	
+}
+void task_10ms(void)
+{
+ 542:	08 95       	ret
+
+00000544 <task_20ms>:
+	
+}
+void task_20ms(void)
+{
+ 544:	08 95       	ret
+
+00000546 <task_50ms>:
+	
+}
+void task_50ms(void)
+{
+ 546:	08 95       	ret
+
+00000548 <task_100ms>:
+	
+}
+void task_100ms(void)
+{
+ 548:	08 95       	ret
+
+0000054a <task_1ms>:
+		}
+	}
+}
+uint16 count;
+void task_1ms(void)
+{
+ 54a:	cf 93       	push	r28
+	char local_states= states;
+ 54c:	c0 91 b8 00 	lds	r28, 0x00B8
+	debounce_D(&PINB);
+ 550:	86 e3       	ldi	r24, 0x36	; 54
+ 552:	90 e0       	ldi	r25, 0x00	; 0
+ 554:	0e 94 ea 00 	call	0x1d4	; 0x1d4 <debounce_D>
+	processEvents();
+ 558:	0e 94 9f 00 	call	0x13e	; 0x13e <processEvents>
+	if((local_states&1)!=CL)
+ 55c:	80 91 b8 00 	lds	r24, 0x00B8
+ 560:	c8 27       	eor	r28, r24
+ 562:	c0 ff       	sbrs	r28, 0
+ 564:	02 c0       	rjmp	.+4      	; 0x56a <task_1ms+0x20>
+	{
+		PORTC=0x00;
+ 566:	15 ba       	out	0x15, r1	; 21
+ 568:	03 c0       	rjmp	.+6      	; 0x570 <task_1ms+0x26>
+	}
+	else
+	PORTC= LEDS();
+ 56a:	0e 94 ec 01 	call	0x3d8	; 0x3d8 <LEDS>
+ 56e:	85 bb       	out	0x15, r24	; 21
+	
+	adc_cyclic(0);
+ 570:	80 e0       	ldi	r24, 0x00	; 0
+ 572:	0e 94 58 00 	call	0xb0	; 0xb0 <adc_cyclic>
+}
+ 576:	cf 91       	pop	r28
+ 578:	08 95       	ret
+
+0000057a <init>:
+	 {5,1000,task_100ms,WAIT,0},
+};
+
+uint8_t i;
+void init(void)
+{
+ 57a:	e0 e6       	ldi	r30, 0x60	; 96
+ 57c:	f0 e0       	ldi	r31, 0x00	; 0
+ 57e:	26 e9       	ldi	r18, 0x96	; 150
+ 580:	30 e0       	ldi	r19, 0x00	; 0
+	
+	for(i=0;i<NUM_TASKS;i++)
+	{
+		tablou_tasks[i].current_time=tablou_tasks[i].delay;
+ 582:	80 81       	ld	r24, Z
+ 584:	91 81       	ldd	r25, Z+1	; 0x01
+ 586:	90 87       	std	Z+8, r25	; 0x08
+ 588:	87 83       	std	Z+7, r24	; 0x07
+ 58a:	39 96       	adiw	r30, 0x09	; 9
+
+uint8_t i;
+void init(void)
+{
+	
+	for(i=0;i<NUM_TASKS;i++)
+ 58c:	e2 17       	cp	r30, r18
+ 58e:	f3 07       	cpc	r31, r19
+ 590:	c1 f7       	brne	.-16     	; 0x582 <init+0x8>
+ 592:	86 e0       	ldi	r24, 0x06	; 6
+ 594:	80 93 b9 00 	sts	0x00B9, r24
+ 598:	08 95       	ret
+
+0000059a <idle>:
+		tablou_tasks[i].current_time=tablou_tasks[i].delay;
+	}
+	
+}
+void idle(void)
+{
+ 59a:	cf 93       	push	r28
+ 59c:	df 93       	push	r29
+ 59e:	e6 e6       	ldi	r30, 0x66	; 102
+ 5a0:	f0 e0       	ldi	r31, 0x00	; 0
+ 5a2:	2c e9       	ldi	r18, 0x9C	; 156
+ 5a4:	30 e0       	ldi	r19, 0x00	; 0
+		{
+			tablou_tasks[i].current_time--;
+		}
+		if(tablou_tasks[i].current_time==0)
+		{
+			tablou_tasks[i].state=READY;
+ 5a6:	41 e0       	ldi	r20, 0x01	; 1
+ 5a8:	df 01       	movw	r26, r30
+void idle(void)
+{
+	
+	for(i=0;i<NUM_TASKS;i++)
+	{
+		if((tablou_tasks[i].state!=READY)&&(tablou_tasks[i].current_time>0))
+ 5aa:	80 81       	ld	r24, Z
+ 5ac:	81 30       	cpi	r24, 0x01	; 1
+ 5ae:	39 f0       	breq	.+14     	; 0x5be <idle+0x24>
+ 5b0:	81 81       	ldd	r24, Z+1	; 0x01
+ 5b2:	92 81       	ldd	r25, Z+2	; 0x02
+ 5b4:	00 97       	sbiw	r24, 0x00	; 0
+ 5b6:	49 f0       	breq	.+18     	; 0x5ca <idle+0x30>
+		{
+			tablou_tasks[i].current_time--;
+ 5b8:	01 97       	sbiw	r24, 0x01	; 1
+ 5ba:	92 83       	std	Z+2, r25	; 0x02
+ 5bc:	81 83       	std	Z+1, r24	; 0x01
+		}
+		if(tablou_tasks[i].current_time==0)
+ 5be:	11 96       	adiw	r26, 0x01	; 1
+ 5c0:	8d 91       	ld	r24, X+
+ 5c2:	9c 91       	ld	r25, X
+ 5c4:	12 97       	sbiw	r26, 0x02	; 2
+ 5c6:	89 2b       	or	r24, r25
+ 5c8:	49 f4       	brne	.+18     	; 0x5dc <idle+0x42>
+		{
+			tablou_tasks[i].state=READY;
+ 5ca:	4c 93       	st	X, r20
+ 5cc:	ed 01       	movw	r28, r26
+ 5ce:	24 97       	sbiw	r28, 0x04	; 4
+			tablou_tasks[i].current_time=tablou_tasks[i].cycletime;
+ 5d0:	88 81       	ld	r24, Y
+ 5d2:	99 81       	ldd	r25, Y+1	; 0x01
+ 5d4:	12 96       	adiw	r26, 0x02	; 2
+ 5d6:	9c 93       	st	X, r25
+ 5d8:	8e 93       	st	-X, r24
+ 5da:	11 97       	sbiw	r26, 0x01	; 1
+ 5dc:	39 96       	adiw	r30, 0x09	; 9
+	
+}
+void idle(void)
+{
+	
+	for(i=0;i<NUM_TASKS;i++)
+ 5de:	e2 17       	cp	r30, r18
+ 5e0:	f3 07       	cpc	r31, r19
+ 5e2:	11 f7       	brne	.-60     	; 0x5a8 <idle+0xe>
+ 5e4:	86 e0       	ldi	r24, 0x06	; 6
+ 5e6:	80 93 b9 00 	sts	0x00B9, r24
+			tablou_tasks[i].state=READY;
+			tablou_tasks[i].current_time=tablou_tasks[i].cycletime;
+		}
+	}
+	
+}
+ 5ea:	df 91       	pop	r29
+ 5ec:	cf 91       	pop	r28
+ 5ee:	08 95       	ret
+
+000005f0 <scheduler>:
+	{
+		for(i=0;i<NUM_TASKS;i++)
+		{
+			if(tablou_tasks[i].state==READY)
+			{
+				tablou_tasks[i].state=ACTIVE;
+ 5f0:	c2 e0       	ldi	r28, 0x02	; 2
+}
+void scheduler(void)
+{
+	while(1)
+	{
+		for(i=0;i<NUM_TASKS;i++)
+ 5f2:	10 92 b9 00 	sts	0x00B9, r1
+ 5f6:	80 e0       	ldi	r24, 0x00	; 0
+		{
+			if(tablou_tasks[i].state==READY)
+ 5f8:	90 e0       	ldi	r25, 0x00	; 0
+ 5fa:	fc 01       	movw	r30, r24
+ 5fc:	ee 0f       	add	r30, r30
+ 5fe:	ff 1f       	adc	r31, r31
+ 600:	ee 0f       	add	r30, r30
+ 602:	ff 1f       	adc	r31, r31
+ 604:	ee 0f       	add	r30, r30
+ 606:	ff 1f       	adc	r31, r31
+ 608:	e8 0f       	add	r30, r24
+ 60a:	f9 1f       	adc	r31, r25
+ 60c:	e0 5a       	subi	r30, 0xA0	; 160
+ 60e:	ff 4f       	sbci	r31, 0xFF	; 255
+ 610:	26 81       	ldd	r18, Z+6	; 0x06
+ 612:	21 30       	cpi	r18, 0x01	; 1
+ 614:	09 f5       	brne	.+66     	; 0x658 <scheduler+0x68>
+			{
+				tablou_tasks[i].state=ACTIVE;
+ 616:	fc 01       	movw	r30, r24
+ 618:	ee 0f       	add	r30, r30
+ 61a:	ff 1f       	adc	r31, r31
+ 61c:	ee 0f       	add	r30, r30
+ 61e:	ff 1f       	adc	r31, r31
+ 620:	ee 0f       	add	r30, r30
+ 622:	ff 1f       	adc	r31, r31
+ 624:	8e 0f       	add	r24, r30
+ 626:	9f 1f       	adc	r25, r31
+ 628:	fc 01       	movw	r30, r24
+ 62a:	e0 5a       	subi	r30, 0xA0	; 160
+ 62c:	ff 4f       	sbci	r31, 0xFF	; 255
+ 62e:	c6 83       	std	Z+6, r28	; 0x06
+				tablou_tasks[i].task_pointer();
+ 630:	04 80       	ldd	r0, Z+4	; 0x04
+ 632:	f5 81       	ldd	r31, Z+5	; 0x05
+ 634:	e0 2d       	mov	r30, r0
+ 636:	09 95       	icall
+				tablou_tasks[i].state=WAIT;
+ 638:	80 91 b9 00 	lds	r24, 0x00B9
+ 63c:	90 e0       	ldi	r25, 0x00	; 0
+ 63e:	fc 01       	movw	r30, r24
+ 640:	ee 0f       	add	r30, r30
+ 642:	ff 1f       	adc	r31, r31
+ 644:	ee 0f       	add	r30, r30
+ 646:	ff 1f       	adc	r31, r31
+ 648:	ee 0f       	add	r30, r30
+ 64a:	ff 1f       	adc	r31, r31
+ 64c:	8e 0f       	add	r24, r30
+ 64e:	9f 1f       	adc	r25, r31
+ 650:	fc 01       	movw	r30, r24
+ 652:	e0 5a       	subi	r30, 0xA0	; 160
+ 654:	ff 4f       	sbci	r31, 0xFF	; 255
+ 656:	16 82       	std	Z+6, r1	; 0x06
+}
+void scheduler(void)
+{
+	while(1)
+	{
+		for(i=0;i<NUM_TASKS;i++)
+ 658:	80 91 b9 00 	lds	r24, 0x00B9
+ 65c:	8f 5f       	subi	r24, 0xFF	; 255
+ 65e:	80 93 b9 00 	sts	0x00B9, r24
+ 662:	86 30       	cpi	r24, 0x06	; 6
+ 664:	30 f6       	brcc	.-116    	; 0x5f2 <scheduler+0x2>
+ 666:	c8 cf       	rjmp	.-112    	; 0x5f8 <scheduler+0x8>
+
+00000668 <_exit>:
+ 668:	f8 94       	cli
+
+0000066a <__stop_program>:
+ 66a:	ff cf       	rjmp	.-2      	; 0x66a <__stop_program>
